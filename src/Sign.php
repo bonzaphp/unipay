@@ -8,3 +8,11 @@
 
 /*签名*/
 
+namespace Bonzaphp\Hfpay;
+
+class Sign{
+    public function __construct()
+    {
+        echo 123;
+    }
+}
