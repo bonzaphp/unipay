@@ -3,6 +3,6 @@
 ---
 
 1. 安装方法
-```bash
+```
 composer require bonzaphp/hfpay
 ```

@@ -1,20 +1,24 @@
 {
-    "name": "bonzaphp/hfpay",
-    "description": "汇付宝支付",
-    "type": "library",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "Bonzaphp\\Hfpay\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "bonza",
-            "email": "bonzaphp@gmail.com"
-        }
-    ],
-    "require": {
-        "guzzlehttp/guzzle": "^7.7"
+  "name": "bonzaphp/hfpay",
+  "description": "汇付宝支付",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Bonzaphp\\Hfpay\\": "src/"
     }
+  },
+  "authors": [
+    {
+      "name": "bonza",
+      "email": "bonzaphp@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "^7.7",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  }
 }
