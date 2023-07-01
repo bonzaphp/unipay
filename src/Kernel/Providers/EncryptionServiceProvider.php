@@ -7,9 +7,9 @@
  * Time: 10:44
  */
 
-namespace Bonzaphp\Hfpay\Kernel\Providers;
+namespace Bonza\Hfpay\Kernel\Providers;
 
-use Bonzaphp\Hfpay\Kernel\Encryption\Encryptor;
+use Bonza\Hfpay\Kernel\Encryption\Encryptor;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -18,7 +18,7 @@ use Pimple\ServiceProviderInterface;
  * Class EncryptionServiceProvider
  * @author bonzaphp@gmail.com
  * @Date 2023/7/1 10:44
- * @package Bonzaphp\Hfpay\Kernel\Providers
+ * @package Bonza\Hfpay\Kernel\Providers
  */
 class EncryptionServiceProvider implements ServiceProviderInterface
 {

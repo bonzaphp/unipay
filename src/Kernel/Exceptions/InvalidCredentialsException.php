@@ -5,7 +5,7 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonzaphp\Hfpay\Kernel\Exceptions;
+namespace Bonza\Hfpay\Kernel\Exceptions;
 
 class InvalidCredentialsException extends Exception
 {

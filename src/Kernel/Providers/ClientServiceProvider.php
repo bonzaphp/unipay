@@ -5,9 +5,9 @@
  * Date: 2023/7/1
  * Time: 10:45
  */
-namespace Bonzaphp\Hfpay\Kernel\Providers;
+namespace Bonza\Hfpay\Kernel\Providers;
 
-use Bonzaphp\Hfpay\Kernel\Http\Client;
+use Bonza\Hfpay\Kernel\Http\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

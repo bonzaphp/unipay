@@ -5,16 +5,16 @@
  * Date: 2023/7/1
  * Time: 11:31
  */
-namespace Bonzaphp\Hfpay\Kuaijie;
+namespace Bonza\Hfpay\Kuaijie;
 
-use Bonzaphp\Hfpay\Kernel\BaseClient;
+use Bonza\Hfpay\Kernel\BaseClient;
 
 /**
  * 网管快捷支付
  * Class Client
  * @author bonzaphp@gmail.com
  * @Date 2023/7/1 11:32
- * @package Bonzaphp\Hfpay\KjGateWay
+ * @package Bonza\Hfpay\KjGateWay
  */
 class Client extends BaseClient
 {
@@ -25,7 +25,8 @@ class Client extends BaseClient
     public function gatewaySign()
     {
         $content = [];
-        return $this->client->post('https://Pay.Heepay.com/API/PageSign/Index.aspx', $content);
+//        return $this->client->post('https://Pay.Heepay.com/API/PageSign/Index.aspx', $content);
+        return "123";
     }
 
     /**

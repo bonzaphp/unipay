@@ -5,18 +5,18 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 
 use Overtrue\Http\Support\Collection;
 use Pimple\Container;
 
 /**
- * @property \Bonzaphp\Hfpay\Kuaijie\Client $kjpay
+ * @property \Bonza\Hfpay\Kuaijie\Client $kjpay
  * @property \Monolog\Logger $logger
- * @property \Bonzaphp\Hfpay\Kernel\Server $server
+ * @property \Bonza\Hfpay\Kernel\Server $server
  * @property \Symfony\Component\HttpFoundation\Request $request
- * @property \Bonzaphp\Hfpay\Kernel\Encryption\Encryptor $encryptor
- * @property \Bonzaphp\Hfpay\Kernel\AccessToken $access_token
+ * @property \Bonza\Hfpay\Kernel\Encryption\Encryptor $encryptor
+ * @property \Bonza\Hfpay\Kernel\AccessToken $access_token
  */
 class Application extends Container
 {

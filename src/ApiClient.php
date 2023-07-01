@@ -6,7 +6,7 @@
  * Time: 9:19
  */
 
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 //require_once 'AopEncrypt.php';
 
 /**
@@ -14,7 +14,7 @@ namespace Bonzaphp\Hfpay;
  * Class ApiClient
  * @author bonzaphp@gmail.com
  * @Date 2023/6/30 9:19
- * @package Bonzaphp\Hfpay
+ * @package Bonza\Hfpay
  */
 class ApiClient
 {

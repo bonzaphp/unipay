@@ -1,5 +1,5 @@
 {
-  "name": "bonzaphp/hfpay",
+  "name": "bonza/hfpay",
   "description": "汇付宝支付 汇元支付 支付SDK",
   "keywords": [
     "hfpay",
@@ -21,7 +21,7 @@
     "pimple/pimple": "^3.0",
     "psr/simple-cache": "^1.0",
     "monolog/monolog": "^1.23 || ^2.0",
-    "symfony/cache": "^3.3 || ^4.0 || ^5.0",
+    "symfony/cache": "^5.0 ",
     "symfony/http-foundation": "^3.2 || ^4.0 || ^5.0",
     "ext-openssl": "*",
     "ext-json": "*"
@@ -31,7 +31,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Bonzaphp\\Hfpay\\": "src/"
+      "Bonza\\Hfpay\\": "src/"
     },
     "files": [
       "src/helpers.php"
@@ -39,7 +39,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Bonzaphp\\Hfpay\\Tests\\": "tests/"
+      "Bonza\\Hfpay\\Tests\\": "tests/"
     }
   }
 }

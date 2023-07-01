@@ -5,13 +5,13 @@
  * Date: 2023/6/29
  * Time: 19:13
  */
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 /**
  * 汇元支付类
  * Class Hfpay
  * @author bonzaphp@gmail.com
  * @Date 2023/6/29 19:14
- * @package Bonzaphp\Hfpay
+ * @package Bonza\Hfpay
  */
 class Hfpay
 {

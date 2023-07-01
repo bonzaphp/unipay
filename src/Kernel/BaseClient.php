@@ -5,26 +5,26 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonzaphp\Hfpay\Kernel;
+namespace Bonza\Hfpay\Kernel;
 
 class BaseClient
 {
     /**
-     * @var \Bonzaphp\Hfpay\Application
+     * @var \Bonza\Hfpay\Application
      */
-    protected \Bonzaphp\Hfpay\Application $app;
+    protected \Bonza\Hfpay\Application $app;
 
     /**
-     * @var \Bonzaphp\Hfpay\Kernel\Http\Client
+     * @var \Bonza\Hfpay\Kernel\Http\Client
      */
     protected $client;
 
     /**
      * Client constructor.
      *
-     * @param  \Bonzaphp\Hfpay\Application  $app
+     * @param  \Bonza\Hfpay\Application  $app
      */
-    public function __construct(\Bonzaphp\Hfpay\Application $app)
+    public function __construct(\Bonza\Hfpay\Application $app)
     {
         $this->app = $app;
         $this->client = $this->app['client']->withAccessTokenMiddleware()->withRetryMiddleware()->withAddHeaderMiddleware();

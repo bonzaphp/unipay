@@ -6,13 +6,13 @@
  * Time: 19:07
  */
 
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 /**
  * 参数构建类
  * Class ParamBuilder
  * @author bonzaphp@gmail.com
  * @Date 2023/6/29 19:07
- * @package Bonzaphp\Hfpay
+ * @package Bonza\Hfpay
  */
 class ParamBuilder
 {

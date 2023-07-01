@@ -5,9 +5,9 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonzaphp\Hfpay\Kernel\Encryption;
+namespace Bonza\Hfpay\Kernel\Encryption;
 
-use function Bonzaphp\Hfpay\str_random;
+use function Bonza\Hfpay\str_random;
 
 class Encryptor
 {

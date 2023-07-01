@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Bonzaphp\Hfpay\Kuaijie;
+namespace Bonza\Hfpay\Kuaijie;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

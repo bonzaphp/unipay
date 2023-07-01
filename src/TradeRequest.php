@@ -6,13 +6,13 @@
  * Time: 19:26
  */
 
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 /**
  * 汇付宝接口公共参数封装
  * Class TradeRequest
  * @author bonzaphp@gmail.com
  * @Date 2023/6/29 19:27
- * @package Bonzaphp\Hfpay
+ * @package Bonza\Hfpay
  */
 class TradeRequest
 {

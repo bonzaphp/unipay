@@ -6,7 +6,7 @@
  * Time: 9:51
  */
 
-use Bonzaphp\Hfpay\Hfpay;
+use Bonza\Hfpay\Hfpay;
 use PHPUnit\Framework\TestCase;
 
 class HfpayTest extends TestCase

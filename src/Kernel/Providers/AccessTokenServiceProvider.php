@@ -7,9 +7,9 @@
  * Time: 10:45
  */
 
-namespace Bonzaphp\Hfpay\Kernel\Providers;
+namespace Bonza\Hfpay\Kernel\Providers;
 
-use Bonzaphp\Hfpay\Kernel\AccessToken;
+use Bonza\Hfpay\Kernel\AccessToken;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

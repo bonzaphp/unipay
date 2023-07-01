@@ -5,7 +5,7 @@
  * Date: 2023/7/1
  * Time: 10:20
  */
-namespace Bonzaphp\Hfpay\Kernel\Http;
+namespace Bonza\Hfpay\Kernel\Http;
 
 use GuzzleHttp\Middleware;
 use Overtrue\Http\Client as BaseClient;
@@ -17,12 +17,12 @@ use Psr\Http\Message\ResponseInterface;
  * Class Client
  * @author bonzaphp@gmail.com
  * @Date 2023/7/1 10:20
- * @package Bonzaphp\Hfpay\Kernel\Http
+ * @package Bonza\Hfpay\Kernel\Http
  */
 class Client extends BaseClient
 {
     /**替换
-     * @var \Bonzaphp\Hfpay\Application
+     * @var \Bonza\Hfpay\Application
      */
     protected $app;
 
@@ -34,7 +34,7 @@ class Client extends BaseClient
     ];
 
     /**
-     * @param \Bonzaphp\Hfpay\Application $app
+     * @param \Bonza\Hfpay\Application $app
      */
     public function __construct($app)
     {

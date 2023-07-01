@@ -8,7 +8,7 @@
 
 /*签名*/
 
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 
 class Sign{
     public function __construct()

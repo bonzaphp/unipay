@@ -6,7 +6,7 @@
  * Time: 10:25
  */
 
-namespace Bonzaphp\Hfpay;
+namespace Bonza\Hfpay;
 
 /**
  * 委托助手函数
