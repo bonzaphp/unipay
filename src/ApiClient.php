@@ -287,7 +287,7 @@ class ApiClient
      */
     protected function getMillisecond()
     {
-        list($s1, $s2) = explode(' ', microtime());
+        [$s1, $s2] = explode(' ', microtime());
         return (float)sprintf('%.0f', (floatval($s1) + floatval($s2)) * 1000);
     }
 
@@ -638,7 +638,11 @@ class ApiClient
      *  验证签名
      *  在使用本方法前，必须初始化AopClient且传入公钥参数。
      *  公钥是否是读取字符串还是读取文件，是根据初始化传入的值判断的。
-     **/
+     * @param $params
+     * @param $rsaPublicKeyFilePath
+     * @param string $signType
+     * @return bool
+     */
     public function rsaCheckV1($params, $rsaPublicKeyFilePath, $signType = 'RSA')
     {
         $sign = $params['sign'];
