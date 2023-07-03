@@ -26,6 +26,7 @@ class Client extends BaseClient
     {
         $content = [];
 //        return $this->client->post('https://Pay.Heepay.com/API/PageSign/Index.aspx', $content);
+//        return $this->client->postJson('https://Pay.Heepay.com/API/PageSign/Index.aspx', $content);
         return "123";
     }
 

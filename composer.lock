@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bb1317f24ea7c51aa5330bf398f3d76",
+    "content-hash": "e906c20fc40df813e0cae9d84b33fa45",
     "packages": [
+        {
+            "name": "bonza/ssl",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bonzaphp/ssl.git",
+                "reference": "8615b6241f6a95ad42d82de9d565aa0f640c99a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bonzaphp/ssl/zipball/8615b6241f6a95ad42d82de9d565aa0f640c99a4",
+                "reference": "8615b6241f6a95ad42d82de9d565aa0f640c99a4",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=7.2.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "bonza\\ssl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "bonza",
+                    "email": "y.shi.guo@gmail.com"
+                }
+            ],
+            "description": "php的openssl操作类库,简化加解密操作",
+            "keywords": [
+                "openssl",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/bonzaphp/ssl/issues",
+                "source": "https://github.com/bonzaphp/ssl/tree/v1.0.3"
+            },
+            "time": "2023-07-03T07:04:35+00:00"
+        },
         {
             "name": "guzzlehttp/guzzle",
             "version": "6.5.8",
@@ -2472,16 +2531,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/65c39594fbd8c67abfc68bb323f86447bab79cc0",
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2519,9 +2578,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.1"
             },
-            "time": "2023-06-01T12:35:21+00:00"
+            "time": "2023-06-29T20:46:06+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
