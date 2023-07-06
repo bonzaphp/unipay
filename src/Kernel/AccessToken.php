@@ -5,11 +5,11 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonza\Hfpay\Kernel;
+namespace Bonza\UniPay\Kernel;
 
-use Bonza\Hfpay\Kernel\Exceptions\InvalidCredentialsException;
-use Bonza\Hfpay\Kernel\Http\Client;
-use function Bonza\Hfpay\tap;
+use Bonza\UniPay\Kernel\Exceptions\InvalidCredentialsException;
+use Bonza\UniPay\Kernel\Http\Client;
+use function Bonza\UniPay\tap;
 use Overtrue\Http\Traits\ResponseCastable;
 
 class AccessToken
@@ -17,14 +17,14 @@ class AccessToken
     use Concerns\InteractsWithCache, ResponseCastable;
 
     /**
-     * @var \Bonza\Hfpay\Application
+     * @var \Bonza\UniPay\Application
      */
     protected $app;
 
     /**
      * AccessToken constructor.
      *
-     * @param \Bonza\Hfpay\Application
+     * @param \Bonza\UniPay\Application
      */
     public function __construct($app)
     {

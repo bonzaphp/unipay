@@ -1,5 +1,5 @@
 {
-  "name": "bonza/hfpay",
+  "name": "bonza/unipay",
   "description": "汇付宝支付 汇元支付 支付SDK",
   "keywords": [
     "hfpay",
@@ -28,11 +28,12 @@
     "bonza/ssl": "1.0.3"
   },
   "require-dev": {
+    "mockery/mockery": "^1.0",
     "phpunit/phpunit": "^6.2"
   },
   "autoload": {
     "psr-4": {
-      "Bonza\\Hfpay\\": "src/"
+      "Bonza\\UniPay\\": "src/"
     },
     "files": [
       "src/helpers.php"
@@ -40,7 +41,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Bonza\\Hfpay\\Tests\\": "tests/"
+      "Bonza\\UniPay\\Tests\\": "tests/"
     }
   }
 }

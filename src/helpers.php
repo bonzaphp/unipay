@@ -6,7 +6,7 @@
  * Time: 10:25
  */
 
-namespace Bonza\Hfpay;
+namespace Bonza\UniPay;
 
 /**
  * 委托助手函数

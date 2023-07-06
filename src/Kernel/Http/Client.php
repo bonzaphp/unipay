@@ -5,7 +5,7 @@
  * Date: 2023/7/1
  * Time: 10:20
  */
-namespace Bonza\Hfpay\Kernel\Http;
+namespace Bonza\UniPay\Kernel\Http;
 
 use GuzzleHttp\Middleware;
 use Overtrue\Http\Client as BaseClient;
@@ -17,12 +17,12 @@ use Psr\Http\Message\ResponseInterface;
  * Class Client
  * @author bonzaphp@gmail.com
  * @Date 2023/7/1 10:20
- * @package Bonza\Hfpay\Kernel\Http
+ * @package Bonza\UniPay\Kernel\Http
  */
 class Client extends BaseClient
 {
     /**替换
-     * @var \Bonza\Hfpay\Application
+     * @var \Bonza\UniPay\Application
      */
     protected $app;
 
@@ -30,11 +30,11 @@ class Client extends BaseClient
      * @var array
      */
     protected static $httpConfig = [
-        'base_uri' => 'https://oapi.dingtalk.com',
+        'base_uri' => 'Https://Pay.Heepay.com/',
     ];
 
     /**
-     * @param \Bonza\Hfpay\Application $app
+     * @param \Bonza\UniPay\Application $app
      */
     public function __construct($app)
     {
@@ -101,6 +101,31 @@ class Client extends BaseClient
         };
 
         $this->pushMiddleware($middleware, 'add_header');
+
+        return $this;
+    }
+
+    /**
+     * 统一对参数进行签名和加密处理
+     * @return $this
+     */
+    public function withSignEncryptMiddleware()
+    {
+        if (isset($this->getMiddlewares()['sign_encrypt'])) {
+            return $this;
+        }
+
+        $middleware = function (callable $handler) {
+            return function (RequestInterface $request, array $options) use ($handler) {
+                if ($this->app['access_token']) {
+                    $request = $request->withHeader('x-acs-dingtalk-access-token', $this->app['access_token']->getToken());
+                }
+
+                return $handler($request, $options);
+            };
+        };
+
+        $this->pushMiddleware($middleware, 'sign_encrypt');
 
         return $this;
     }

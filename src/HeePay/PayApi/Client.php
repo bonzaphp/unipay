@@ -5,16 +5,16 @@
  * Date: 2023/7/1
  * Time: 11:31
  */
-namespace Bonza\Hfpay\Kuaijie;
+namespace Bonza\UniPay\HeePay\PayApi;
 
-use Bonza\Hfpay\Kernel\BaseClient;
+use Bonza\UniPay\Kernel\BaseClient;
 
 /**
  * 网管快捷支付
  * Class Client
  * @author bonzaphp@gmail.com
  * @Date 2023/7/1 11:32
- * @package Bonza\Hfpay\KjGateWay
+ * @package Bonza\UniPay\KjGateWay
  */
 class Client extends BaseClient
 {
@@ -39,7 +39,7 @@ class Client extends BaseClient
      */
     public function sendPayMessage($message)
     {
-        return $this->client->post('Https://Pay.Heepay.com/WithholdAuthPay/SendPaySMS.aspx', $message);
+        return $this->client->post('WithholdAuthPay/SendPaySMS.aspx', $message);
     }
 
 }

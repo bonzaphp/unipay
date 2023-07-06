@@ -5,7 +5,7 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonza\Hfpay\Kernel\Concerns;
+namespace Bonza\UniPay\Kernel\Concerns;
 
 use Psr\SimpleCache\CacheInterface;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;

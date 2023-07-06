@@ -5,9 +5,9 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonza\Hfpay\Kernel\Encryption;
+namespace Bonza\UniPay\Kernel\Encryption;
 
-use function Bonza\Hfpay\str_random;
+use function Bonza\UniPay\str_random;
 
 class Encryptor
 {

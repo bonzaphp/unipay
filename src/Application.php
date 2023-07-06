@@ -5,18 +5,18 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonza\Hfpay;
+namespace Bonza\UniPay;
 
 use Overtrue\Http\Support\Collection;
 use Pimple\Container;
 
 /**
- * @property \Bonza\Hfpay\Kuaijie\Client $kjpay
+ * @property \Bonza\UniPay\Heepay\PayApi\Client $kjpay
  * @property \Monolog\Logger $logger
- * @property \Bonza\Hfpay\Kernel\Server $server
+ * @property \Bonza\UniPay\Kernel\Server $server
  * @property \Symfony\Component\HttpFoundation\Request $request
- * @property \Bonza\Hfpay\Kernel\Encryption\Encryptor $encryptor
- * @property \Bonza\Hfpay\Kernel\AccessToken $access_token
+ * @property \Bonza\UniPay\Kernel\Encryption\Encryptor $encryptor
+ * @property \Bonza\UniPay\Kernel\AccessToken $access_token
  */
 class Application extends Container
 {
@@ -25,7 +25,7 @@ class Application extends Container
      * @var array
      */
     protected array $providers = [
-        Kuaijie\ServiceProvider::class,
+        \Bonza\UniPay\Heepay\PayApi\ServiceProvider::class,
         Kernel\Providers\ClientServiceProvider::class,
         Kernel\Providers\LoggerServiceProvider::class,
         Kernel\Providers\ServerServiceProvider::class,

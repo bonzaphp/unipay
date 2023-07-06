@@ -6,16 +6,16 @@
  * Time: 10:19
  */
 
-namespace Bonza\Hfpay\Kernel;
+namespace Bonza\UniPay\Kernel;
 
-use Bonza\Hfpay\Kernel\Exceptions\InvalidArgumentException;
-use function Bonza\Hfpay\tap;
+use Bonza\UniPay\Kernel\Exceptions\InvalidArgumentException;
+use function Bonza\UniPay\tap;
 use Symfony\Component\HttpFoundation\Response;
 
 class Server
 {
     /**
-     * @var \Bonza\Hfpay\Application
+     * @var \Bonza\UniPay\Application
      */
     protected $app;
 
@@ -25,7 +25,7 @@ class Server
     protected $handlers = [];
 
     /**
-     * @param \Bonza\Hfpay\Application $app
+     * @param \Bonza\UniPay\Application $app
      */
     public function __construct($app)
     {

@@ -5,8 +5,9 @@
  * Date: 2023/6/30
  * Time: 9:51
  */
+namespace Bonza\UniPay\Tests;
 
-use Bonza\Hfpay\Hfpay;
+use Bonza\UniPay\HeePay\PayApi;
 use PHPUnit\Framework\TestCase;
 
 class HfpayTest extends TestCase

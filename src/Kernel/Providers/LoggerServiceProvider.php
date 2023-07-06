@@ -7,7 +7,7 @@
  * Time: 10:45
  */
 
-namespace Bonza\Hfpay\Kernel\Providers;
+namespace Bonza\UniPay\Kernel\Providers;
 
 use Monolog\Logger;
 use Pimple\Container;
@@ -25,7 +25,7 @@ class LoggerServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         isset($pimple['logger']) || $pimple['logger'] = function ($app) {
-            return new Logger('Bonza\Hfpay');
+            return new Logger('Bonza\UniPay');
         };
     }
 }

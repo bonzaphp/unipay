@@ -5,9 +5,9 @@
  * Date: 2023/7/1
  * Time: 10:45
  */
-namespace Bonza\Hfpay\Kernel\Providers;
+namespace Bonza\UniPay\Kernel\Providers;
 
-use Bonza\Hfpay\Kernel\Http\Client;
+use Bonza\UniPay\Kernel\Http\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

@@ -1,15 +1,13 @@
 <?php
 
-/*
- * This file is part of the mingyoung/dingtalk.
- *
- * (c) 张铭阳 <mingyoungcheung@gmail.com>
- *
- * This source file is subject to the MIT license that is bundled
- * with this source code in the file LICENSE.
+/**
+ * Created by yang
+ * User: bonzaphp@gmail.com
+ * Date: 2023/7/1
+ * Time: 11:31
  */
 
-namespace Bonza\Hfpay\Kuaijie;
+namespace Bonza\UniPay\HeePay\PayApi;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;

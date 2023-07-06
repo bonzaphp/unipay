@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Bonza\Hfpay\Kernel\Providers;
+namespace Bonza\UniPay\Kernel\Providers;
 
-use Bonza\Hfpay\Kernel\Server;
+use Bonza\UniPay\Kernel\Server;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 

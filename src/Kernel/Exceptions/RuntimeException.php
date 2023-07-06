@@ -5,7 +5,7 @@
  * Date: 2023/7/1
  * Time: 10:19
  */
-namespace Bonza\Hfpay\Kernel\Exceptions;
+namespace Bonza\UniPay\Kernel\Exceptions;
 
 class RuntimeException extends Exception
 {
