@@ -23,7 +23,7 @@ class ServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $pimple)
     {
-        $pimple['kjpay'] = static function ($app) {
+        $pimple['hee_pay'] = static function ($app) {
             return new Client($app);
         };
     }

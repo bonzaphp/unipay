@@ -27,10 +27,12 @@ class Client extends BaseClient
     protected $app;
 
     /**
+     * 配置http客户端的参数，比如url，默认返回类型等
      * @var array
      */
     protected static $httpConfig = [
         'base_uri' => 'Https://Pay.Heepay.com/',
+//        'response_type' => 'object',
     ];
 
     /**

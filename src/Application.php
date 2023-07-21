@@ -11,7 +11,7 @@ use Overtrue\Http\Support\Collection;
 use Pimple\Container;
 
 /**
- * @property \Bonza\UniPay\Heepay\PayApi\Client $kjpay
+ * @property \Bonza\UniPay\Heepay\PayApi\Client $hee_pay
  * @property \Monolog\Logger $logger
  * @property \Bonza\UniPay\Kernel\Server $server
  * @property \Symfony\Component\HttpFoundation\Request $request

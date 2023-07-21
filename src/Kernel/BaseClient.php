@@ -27,6 +27,7 @@ class BaseClient
     public function __construct(\Bonza\UniPay\Application $app)
     {
         $this->app = $app;
-        $this->client = $this->app['client']->withAccessTokenMiddleware()->withRetryMiddleware()->withAddHeaderMiddleware();
+//        $this->client = $this->app['client']->withAccessTokenMiddleware()->withRetryMiddleware()->withAddHeaderMiddleware();
+        $this->client = $this->app['client'];
     }
 }
