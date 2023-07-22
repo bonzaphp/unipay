@@ -63,10 +63,10 @@ class Client extends BaseClient
      * 网关签约
      * @param array $actual_params 业务参数
      * @param array $common_params 公共参数
-     * @return string
-     * @throws RuntimeException|\GuzzleHttp\Exception\GuzzleException
+     * @return array
+     * @throws RuntimeException
      */
-    public function gatewaySign(array $actual_params, array $common_params)
+    public function gatewaySign(array $actual_params, array $common_params): array
     {
         /* 公共请求参数 */
         $biz_content = json_encode($actual_params, JSON_UNESCAPED_UNICODE);
@@ -75,14 +75,13 @@ class Client extends BaseClient
         $common_params['sign'] = $this->signByPrivateKey($sign_str, $this->merchant_private_key);
         $common_params['biz_content'] = $this->encrypt($this->heepay_public_key, $biz_content);
         $data = $common_params;
-        $res = $this->client->postJson('API/PageSign/Index.aspx', $data);
+        $res = $this->client->request(
+            'API/PageSign/Index.aspx',
+            'POST',
+            $data
+        );
         // 商家私钥解密,得到业务参数
         $actual_response = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $res['data']);
-        $check = $this->signVerify($actual_response, $res, $common_params);
-        if (!$check) {
-            //TODO: 验签需要完善
-//            throw new RuntimeException('验签失败');
-        }
         $res['biz_content'] = json_decode($actual_response, true);
         return $res;
     }
@@ -91,12 +90,12 @@ class Client extends BaseClient
      * 签约查询
      * @param array $actual_params 业务参数
      * @param array $common_params 公共参数
+     * @return string
      * @throws RuntimeException
      * @author bonzaphp@gmail.com
      */
-    public function querySign(array $actual_params, array $common_params)
+    public function querySign(array $actual_params, array $common_params): string
     {
-        /* 签约查询接口start   */
         $biz_content = json_encode(['out_trade_no' => $actual_params['out_trade_no']], JSON_UNESCAPED_UNICODE);
         $common_params['biz_content'] = $biz_content;
         $common_params['method'] = 'heepay.agreement.bank.sign.query';
@@ -105,25 +104,21 @@ class Client extends BaseClient
         if (!$res) throw new RuntimeException('私钥签名错误');
         $sign = base64_encode($sign);
         $common_params['sign'] = $sign;
-        try {
-            $data = $common_params;
-            $response = $this->client->postJson('API/PageSign/Index.aspx', $data);
-            $json_str = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $data->data);
-            $json_obj = json_decode($json_str);
-            $sign_no = $json_obj->sign_no;
-            echo $sign_no;
-            echo "</br>";
-        } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-            exit($e->getMessage());
-        }
-        /* 签约查询接口end   */
+        $data = $common_params;
+        $response = $this->client->request(
+            'API/PageSign/Index.aspx',
+            'POST',
+            ['query' => [], 'json' => $data],
+        );
+        $json_str = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['data']);
+        $json_obj = json_decode($json_str);
+        return $json_obj->sign_no;
     }
 
     /**
      * 解约接口
      * @param array $data
      * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
-     * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws RuntimeException
      * @author bonzaphp@gmail.com
      */
@@ -134,19 +129,20 @@ class Client extends BaseClient
             'hy_auth_uid' => '',
         ];
         $common_params = [
-            'agent_id'     => $this->app['config']->get('merch_id'),
-//            'encrypt_data' => '',
-//            'sign'         => '',
+            'agent_id' => $this->app['config']->get('merch_id'),
+            //            'encrypt_data' => '',
+            //            'sign'         => '',
         ];
         $common_params['sign'] = $this->build_params($actual_params);
-        $common_params['encrypt_data'] = $this->encrypt($this->heepay_public_key,$common_params['sign']);
+        $common_params['encrypt_data'] = $this->encrypt($this->heepay_public_key, $common_params['sign']);
         return $this->client->post('WithholdAuthPay/CancelAuth.aspx', $data);
     }
 
     /**
      * 验签
      * @param string $actual_response 返回的业务参数
-     * @param $res
+     * @param array $res
+     * @param $common_params
      * @return bool
      * @throws RuntimeException
      * @author bonzaphp@gmail.com
@@ -155,7 +151,7 @@ class Client extends BaseClient
     {
         $common_params['biz_content'] = $actual_response;
         $sign_str = $this->build_params($common_params);
-        return $this->signByPublicKeyVerify($sign_str, $res['sign'], $this->heepay_public_key);
+        return $this->checkSign($actual_response, $res['sign'], $this->heepay_public_key);
     }
 
     /**
@@ -236,7 +232,7 @@ class Client extends BaseClient
      * @return bool
      * @author bonzaphp@gmail.com
      */
-    private function signByPublicKeyVerify(string $data, $signature, string $public_key): bool
+    private function checkSign(string $data, $signature, string $public_key): bool
     {
         $res = openssl_verify($data, base64_decode($signature), $public_key);
         return $res === 1;
@@ -264,13 +260,38 @@ class Client extends BaseClient
     /**
      * 发送支付短信
      *
-     * @param $message
+     * @param string $sign_no
+     * @param $out_trade_no
      * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function sendPayMessage($message)
+    public function sendPayMessage(string $sign_no, $out_trade_no)
     {
-        return $this->client->post('WithholdAuthPay/SendPaySMS.aspx', $message);
+        $sms_params = [
+            "version"         => 1,
+            "agent_bill_id"   => $out_trade_no,
+            "agent_bill_time" => date('YmdHis'),
+            "pay_amt"         => 0.01,
+            "goods_name"      => 'ceshi 009',
+            "hy_auth_uid"     => $sign_no,
+            "user_ip"         => '0.0.0.0',
+            "notify_url"      => 'http://5164efd8.r2.cpolar.top/notify.php',
+            "return_url"      => '',
+            "expire_time"     => 600,
+        ];
+        ksort($sms_params);
+        $encrypt_data_str = http_build_query($sms_params);
+        //因为 注意：(encrypt_data和sign开发平台默认URLEncode处理了不用再编码提交)，所以对URL编码，进行解码
+        $encrypt_data_str = urldecode($encrypt_data_str);
+        //商家私钥签名
+        openssl_sign($encrypt_data_str, $sign, $this->merchant_private_key);
+        $sms_common_params = [
+            'agent_id'     => 1664502,
+            'encrypt_data' => ($this->ssl->encodeByPublicKey($this->heepay_public_key, $encrypt_data_str)),
+            'sign'         => base64_encode($sign),
+        ];
+        $data = $sms_common_params;
+        return $this->client->post('WithholdAuthPay/SendPaySMS.aspx', $data);
+
     }
 
 }
