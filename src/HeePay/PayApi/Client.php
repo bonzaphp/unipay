@@ -78,8 +78,11 @@ class Client extends BaseClient
         $res = $this->client->request(
             'API/PageSign/Index.aspx',
             'POST',
-            $data
+            ['query' => [], 'json' => $data],
         );
+        if ($res['code'] !== 10000) {
+            throw new RuntimeException($res['sub_msg']);
+        }
         // 商家私钥解密,得到业务参数
         $actual_response = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $res['data']);
         $res['biz_content'] = json_decode($actual_response, true);
@@ -113,29 +116,6 @@ class Client extends BaseClient
         $json_str = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['data']);
         $json_obj = json_decode($json_str);
         return $json_obj->sign_no;
-    }
-
-    /**
-     * 解约接口
-     * @param array $data
-     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
-     * @throws RuntimeException
-     * @author bonzaphp@gmail.com
-     */
-    public function cancel(array $data)
-    {
-        $actual_params = [
-            'version'     => 1,
-            'hy_auth_uid' => '',
-        ];
-        $common_params = [
-            'agent_id' => $this->app['config']->get('merch_id'),
-            //            'encrypt_data' => '',
-            //            'sign'         => '',
-        ];
-        $common_params['sign'] = $this->build_params($actual_params);
-        $common_params['encrypt_data'] = $this->encrypt($this->heepay_public_key, $common_params['sign']);
-        return $this->client->post('WithholdAuthPay/CancelAuth.aspx', $data);
     }
 
     /**
@@ -263,6 +243,7 @@ class Client extends BaseClient
      * @param string $sign_no
      * @param $out_trade_no
      * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws RuntimeException
      */
     public function sendPayMessage(string $sign_no, $out_trade_no)
     {
@@ -290,8 +271,79 @@ class Client extends BaseClient
             'sign'         => base64_encode($sign),
         ];
         $data = $sms_common_params;
-        return $this->client->post('WithholdAuthPay/SendPaySMS.aspx', $data);
+        $response = $this->client->post('WithholdAuthPay/SendPaySMS.aspx', $data);
+        if ($response['ret_code'] === "0000") {
+            $json_str = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['encrypt_data']);
+            echo $json_str;
+            $json_obj = json_decode($json_str);
+            return $json_obj->hy_token_id;
+        }
+        if ($response['ret_code'] === "E104") {
+            throw new RuntimeException($response['ret_msg']);
+        }
+        $json_str = $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['data']);
+        $json_obj = json_decode($json_str);
+        return $json_obj->hy_token_id;
+    }
 
+    /**
+     * 确认支付接口
+     * @param string $hy_token_id
+     * @param $sms_code
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws RuntimeException
+     * @author bonzaphp@gmail.com
+     */
+    public function confirmPay(string $hy_token_id, string $sms_code)
+    {
+        $actual_params = [
+            'version'     => 1,
+            'hy_token_id' => $hy_token_id,
+            'verify_code' => $sms_code,
+        ];
+        $common_params = [
+            'agent_id' => $this->app['config']->get('merch_id'),
+        ];
+        $sign_str = $this->build_params($actual_params);
+        $common_params['sign'] = $this->signByPrivateKey($sign_str, $this->merchant_private_key);
+        $common_params['encrypt_data'] = $this->encrypt($this->heepay_public_key, $sign_str);
+//        $response = $this->client->post('WithholdAuthPay/ConfirmPay.aspx', $common_params);
+//        模拟数据
+        $response = [
+            "ret_code"     => "0000",
+            "ret_msg"      => "提交成功，等待银行处理结果",
+            "encrypt_data" => "dPbaS6AUO+PSB9MLtRQM8qo23CzYbMTRfBwCY+4UmzeNGIkFvqRlS5rk/Dx+94Be5uLvuI6x9JAl43ONDfgmu1aQNW/awfQhJaMt0gZY0Z5tbQZJqldTGAg+25rTxU7oSOD1MLt1LZJRKrDO4CTvrONNkEF3kxZeqfOGmYTtFezq1wMi8rXX4wCfbkNxXBFyp807A9vhQwDefGU9jAlg9r1kpZXCT+VyVXu/urjGn7o9bUaTsKQzf7aDWeW4w0jweurvMWbnhrQO2/lcfzgO+0IG2/CzwG8yZJqWJ46CxgAWKLp7vde6lfxAkCCWX6w+lOf4HbO4JssP5fHwfjUi9Q==",
+            "sign"         => "yX1PM33k9EFMV69kCdVq/3vhkmCY1UC9cKfPbkrSXt4kO5sBcWxYI3VXuMlOICL32NW8vh+6y9e3E976IFX/VuMgDFC/4ITCejxA+A/UDfsdQdh10NHs1zDNcSYDBa0aOJwB+/U6NSvGQ/bw+DA75PvmZvDFH4dVuh4bmxFGrRMhRPCxaDZa1dwebB1ZRQvpM53w5vsakSC7a8jaIt+RNYFF29yQ2XLWghXSWhQQKHle8Vuj4Je7sjB8g4HZtS0UJ3k7FTxHrTvlg0Qee7Ndwi4B/8vryhBvvuhS08XUw6SB9rG0c1XxHUTKJwIAFIaZi+i62joMxMwb4ghkyE4VLQ==",
+        ];
+        if ($response['ret_code'] === '0000') {
+            return $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['encrypt_data']);
+        }
+        throw new RuntimeException($response['ret_msg']);
+    }
+
+    /**
+     * 解约接口
+     * @param string $hy_auth_uid 授权码
+     * @return array|object|\Overtrue\Http\Support\Collection|\Psr\Http\Message\ResponseInterface|string
+     * @throws RuntimeException
+     * @author bonzaphp@gmail.com
+     */
+    public function cancel(string $hy_auth_uid)
+    {
+        $actual_params = [
+            'version'     => 1,
+            'hy_auth_uid' => $hy_auth_uid,
+        ];
+        $common_params = [
+            'agent_id' => $this->app['config']->get('merch_id'),
+        ];
+        $common_params['sign'] = $this->build_params($actual_params);
+        $common_params['encrypt_data'] = $this->encrypt($this->heepay_public_key, $common_params['sign']);
+        $response =  $this->client->post('WithholdAuthPay/CancelAuth.aspx', $common_params);
+        if ($response['ret_code'] === '0000') {
+            return $this->ssl->decodeByPrivateKey($this->merchant_private_key, $response['encrypt_data']);
+        }
+        throw new RuntimeException($response['ret_msg']);
     }
 
 }
