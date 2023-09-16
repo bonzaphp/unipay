@@ -1,10 +1,13 @@
 {
   "name": "bonza/unipay",
-  "description": "汇付宝支付 汇元支付 支付SDK",
+  "description": "汇付宝支付 汇元支付 支付SDK 银付通支付 银付通",
   "keywords": [
-    "hfpay",
+    "pay",
     "汇付宝",
     "汇元支付",
+    "银付通支付",
+    "微信支付",
+    "支付宝支付",
     "sdk"
   ],
   "type": "library",

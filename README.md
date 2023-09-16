@@ -4,5 +4,5 @@
 
 1. 安装方法
 ```
-composer require bonzaphp/unipay
+composer require bonza/unipay
 ```
