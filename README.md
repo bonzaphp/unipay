@@ -1,8 +1,8 @@
-##### 汇元支付库
+##### 支付库
 
 ---
 
 1. 安装方法
 ```
-composer require bonzaphp/hfpay
+composer require bonzaphp/unipay
 ```

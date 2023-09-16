@@ -132,6 +132,7 @@ class Client extends BaseClient
         }
         $middleware = function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
+                /*返回一个StreamInterface类型的流式数据*/
                 $body = $request->getBody();
                 if ($body->isSeekable()) {
                     /*定位到流式数据的开头*/
@@ -174,6 +175,7 @@ class Client extends BaseClient
     }
 
     /**
+     * 重试
      * @return $this
      */
     public function withRetryMiddleware()
