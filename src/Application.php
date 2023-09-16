@@ -37,7 +37,7 @@ class Application extends Container
     ];
 
     /**
-     * 应用出事化
+     * 应用初始化
      *
      * @param  array  $config
      * @param  array  $values

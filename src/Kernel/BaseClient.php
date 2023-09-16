@@ -7,6 +7,8 @@
  */
 namespace Bonza\UniPay\Kernel;
 
+use Bonza\UniPay\Kernel\Http\Client;
+
 class BaseClient
 {
     /**
@@ -15,9 +17,9 @@ class BaseClient
     protected \Bonza\UniPay\Application $app;
 
     /**
-     * @var \Bonza\UniPay\Kernel\Http\Client
+     * @var Client
      */
-    protected $client;
+    protected Client $client;
 
     /**
      * Client constructor.
@@ -27,7 +29,9 @@ class BaseClient
     public function __construct(\Bonza\UniPay\Application $app)
     {
         $this->app = $app;
-//        $this->client = $this->app['client']->withAccessTokenMiddleware()->withRetryMiddleware()->withAddHeaderMiddleware();
-        $this->client = $this->app['client'];
+        /** @var Client $client */
+        $client = $this->app['client'];
+//        $this->client = $client->withAccessTokenMiddleware()->withRetryMiddleware()->withAddHeaderMiddleware();
+        $this->client = $client->withYinFuTongSignMiddleware();
     }
 }

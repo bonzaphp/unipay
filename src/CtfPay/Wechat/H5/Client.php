@@ -33,6 +33,8 @@ class Client extends BaseClient
      */
     public function uniCreateOrder($data)
     {
+        $res = $this->client->post('api/pay/create_order', $data);
+        var_dump($res);
         echo 'success';
     }
 
