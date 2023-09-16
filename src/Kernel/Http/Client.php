@@ -31,7 +31,7 @@ class Client extends BaseClient
      * @var array
      */
     protected static $httpConfig = [
-        'base_uri' => 'Https://Pay.Heepay.com/',
+        'base_uri' => '',
 //        'response_type' => 'object',
     ];
 

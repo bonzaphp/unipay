@@ -12,6 +12,7 @@ use Pimple\Container;
 
 /**
  * @property \Bonza\UniPay\Heepay\PayApi\Client $hee_pay
+ * @property \Bonza\UniPay\CtfPay\Wechat\H5\Client $ctf_wechat_h5
  * @property \Monolog\Logger $logger
  * @property \Bonza\UniPay\Kernel\Server $server
  * @property \Symfony\Component\HttpFoundation\Request $request
@@ -26,6 +27,7 @@ class Application extends Container
      */
     protected array $providers = [
         \Bonza\UniPay\Heepay\PayApi\ServiceProvider::class,
+        \Bonza\UniPay\CtfPay\Wechat\H5\ServiceProvider::class,
         Kernel\Providers\ClientServiceProvider::class,
         Kernel\Providers\LoggerServiceProvider::class,
         Kernel\Providers\ServerServiceProvider::class,
